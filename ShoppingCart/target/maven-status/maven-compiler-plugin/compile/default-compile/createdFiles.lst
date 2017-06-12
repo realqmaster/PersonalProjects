@@ -1,0 +1,5 @@
+it\shopping\models\Order.class
+it\shopping\printers\OrderPrinter.class
+it\shopping\models\Product.class
+it\shopping\models\ProductType.class
+it\shopping\utils\RoundingUtils.class

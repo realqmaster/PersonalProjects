@@ -3,3 +3,7 @@ jdk:
   - oraclejdk8
 before_script: cd ShoppingCart
 script: mvn clean verify
+notifications:
+  email:
+    on_success: never
+    on_failure: always

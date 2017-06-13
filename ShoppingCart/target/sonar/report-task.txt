@@ -1,7 +1,0 @@
-organization=realqmaster-github
-projectKey=ShoppingCart:ShoppingCart
-serverUrl=https://sonarcloud.io
-serverVersion=6.4.0.25310
-dashboardUrl=https://sonarcloud.io/dashboard/index/ShoppingCart:ShoppingCart
-ceTaskId=AVx-BM5kR9bTI5B0HEtR
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AVx-BM5kR9bTI5B0HEtR

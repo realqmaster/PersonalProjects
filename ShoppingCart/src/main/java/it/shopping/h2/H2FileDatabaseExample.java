@@ -27,7 +27,7 @@ public class H2FileDatabaseExample {
            // DeleteDbFiles.execute("~", "test", true);
            // insertWithPreparedStatement();        	
         	//simpleInsert();
-        	
+        	//createTable();
         	openServerModeInBrowser();
         	
 
@@ -141,5 +141,21 @@ public class H2FileDatabaseExample {
     private static void openServerModeInBrowser() throws SQLException {
         Server server = Server.createWebServer().start();
         System.out.println("Server started and connection is open.");
+    }
+    
+    private static void createTable() throws SQLException{
+        Connection connection = getDBConnection();
+        Statement stmt = null;
+    	
+        try {
+        	stmt = connection.createStatement();
+			stmt.execute("CREATE TABLE PRODUCTTYPE(desc varchar(255) primary key, discount numeric)");
+		} catch (SQLException e) {
+			 System.out.println(e.getMessage());
+		}
+        finally{
+        	stmt.close();
+        	connection.close();
+        }
     }
 }

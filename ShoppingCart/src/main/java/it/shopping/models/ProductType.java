@@ -2,10 +2,17 @@ package it.shopping.models;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * The Class ProductType.
  * Defines a product category with an associated discount.
  */
+@Entity
+@Table
 public class ProductType {
 	
 	/** The desc. */
@@ -53,6 +60,8 @@ public class ProductType {
 	 *
 	 * @return the desc
 	 */
+	@Id
+	@Column(name = "desc", unique = true, nullable = false)
 	public String getDesc() {
 		return desc;
 	}
@@ -71,6 +80,7 @@ public class ProductType {
 	 *
 	 * @return the discount
 	 */
+	@Column(name = "discount", unique = false, nullable = true)
 	public BigDecimal getDiscount() {
 		return discount;
 	}

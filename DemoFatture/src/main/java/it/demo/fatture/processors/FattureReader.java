@@ -6,21 +6,37 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import it.demo.fatture.models.Fattura;
 
+/**
+ * The Class FattureReader.
+ */
 public class FattureReader {
 
-	public TreeSet<Fattura> process(String path) {
+	/** Simple formatting logger */
+	private static Logger log = LogManager.getFormatterLogger("console");
+
+	/**
+	 * Process input file.
+	 *
+	 * @param path
+	 *            the path
+	 * @return the tree set
+	 */
+	public Set<Fattura> process(String path) {
 
 		TreeSet<Fattura> tree = new TreeSet<Fattura>();
-
+		FileReader reader = null;
 		try {
-			FileReader reader = new FileReader(path);
+			reader = new FileReader(path);
 			CSVFormat format = CSVFormat.newFormat(';');
 			Iterable<CSVRecord> records = format.parse(reader);
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -34,14 +50,28 @@ public class FattureReader {
 				Fattura item = new Fattura(numero, data, modalita);
 				tree.add(item);
 			}
+
 		} catch (FileNotFoundException e) {
-			System.out.println("File di ingresso non trovato");
+			log.error("File di ingresso non trovato");
+			log.error(e);
 		} catch (IOException e) {
-			System.out.println("Errore durante la lettura del file di ingresso");
+			log.error("Errore durante la lettura del file di ingresso");
+			log.error(e);
 		} catch (ParseException e) {
-			System.out.println("Formato data non valido");
+			log.error("Formato data non valido");
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			log.error(e);
+		}
+
+		finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				} catch (IOException e) {
+					log.error("Errore durante la lettura del file di ingresso");
+					log.error(e);
+				}
+			}
 		}
 
 		return tree;

@@ -33,7 +33,7 @@ public class FattureReader {
 	 */
 	public Set<Fattura> process(String path) {
 
-		TreeSet<Fattura> tree = new TreeSet<Fattura>();
+		Set<Fattura> tree = new TreeSet<Fattura>();
 		FileReader reader = null;
 		try {
 			reader = new FileReader(path);
